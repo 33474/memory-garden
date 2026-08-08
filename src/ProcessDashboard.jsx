@@ -100,12 +100,12 @@ function ProcessDashboard() {
     <main className="process-dashboard">
       <header className="process-header">
         <a className="process-wordmark" href="./">Memory Garden</a>
-        <span>智能体协作档案 · 2026</span>
-        <div><a href="./">打开原型 ↗</a><button onClick={downloadArchive}>下载对话记录 ↓</button></div>
+        <span>Agent collaboration archive · 2026</span>
+        <div><a href="./">Open prototype ↗</a><button onClick={downloadArchive}>Download prompts ↓</button></div>
       </header>
 
       <section className="process-hero">
-        <div><span>12轮 / 指令 + 产出</span><h1>迭代<br />档案</h1></div>
+        <div><span>12 rounds / prompt + output</span><h1>Iteration<br />Archive</h1></div>
         <p>这里仅整理 12 个有效开发轮次的 Prompt 原文和已留存页面截图。因网络重复发送的指令与最终总结已经移除；评价标准和项目复盘暂未开始。</p>
       </section>
 
@@ -119,7 +119,7 @@ function ProcessDashboard() {
           return (
             <article className="round-row" key={`${index}-${round.phase}`}>
               <div className="round-meta"><strong>{String(index).padStart(2, '0')}</strong><span>{round.phase}</span></div>
-              <div className="round-prompt"><small>对话指令原文</small><p>{round.prompt}</p></div>
+              <div className="round-prompt"><small>PROMPT 原文</small><p>{round.prompt}</p></div>
               <div className={`round-shots ${round.screenshots.length > 1 ? 'has-many' : ''}`}>
                 {round.screenshots.map((screenshot, shotIndex) => (
                   <figure key={screenshot}>
@@ -133,7 +133,7 @@ function ProcessDashboard() {
         })}
       </section>
 
-      <footer className="process-footer"><span>Memory Garden · 开发档案</span><span>评价标准与项目复盘</span></footer>
+      <footer className="process-footer"><span>Memory Garden · Development archive</span><span>评价标准与复盘 / waiting for brief</span></footer>
     </main>
   )
 }

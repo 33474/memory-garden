@@ -34,7 +34,7 @@ const seedMemories = [
 ]
 
 const categoryOptions = ['全部', '生活', '旅行', '时尚美妆', '攻略收藏', '学习创作']
-const fallbackImage = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700"><rect width="900" height="700" fill="#f4f4ef"/><path d="M-40 650C190 510 250 155 540 130S810 390 950 30" fill="none" stroke="#00a33a" stroke-width="3"/><text x="42" y="650" font-family="serif" font-size="20" fill="#ff211b">记忆图像 · 正在重新连接</text></svg>')}`
+const fallbackImage = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700"><rect width="900" height="700" fill="#f4f4ef"/><path d="M-40 650C190 510 250 155 540 130S810 390 950 30" fill="none" stroke="#00a33a" stroke-width="3"/><text x="42" y="650" font-family="Arial" font-size="20" fill="#ff211b">MEMORY IMAGE · RECONNECTING</text></svg>')}`
 
 function Arrow({ direction = 'right' }) {
   return <svg className={`arrow arrow-${direction}`} viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M14 6l6 6-6 6" /></svg>
@@ -65,15 +65,15 @@ function OpeningSequence({ onComplete }) {
         <path d="M-20 590 C180 590 128 420 336 430 S432 206 522 190 S680 340 1018 70" />
         <path d="M80 720 C190 570 314 648 420 460 S662 446 720 254 S870 194 990 202" />
       </svg>
-      <div className="opening-code"><span>01</span><span>2026</span><span>生长档案</span></div>
+      <div className="opening-code"><span>01</span><span>2026</span><span>Living archive</span></div>
       <div className="opening-title-wrap">
-        <p>记忆在此汇聚、连接，并继续成为</p>
+        <p>Memories gather, connect, and become</p>
         <h1 aria-label="Memory Garden">
           {'Memory Garden'.split('').map((letter, index) => <span key={`${letter}-${index}`} style={{ '--letter': index }}>{letter === ' ' ? '\u00a0' : letter}</span>)}
         </h1>
-        <em>新根 / 新的生长</em>
+        <em>fresh roots / new growth</em>
       </div>
-      <button onClick={onComplete}>跳过开屏 ↗</button>
+      <button onClick={onComplete}>Skip intro ↗</button>
     </section>
   )
 }
@@ -84,12 +84,12 @@ function Header({ page, onPage, onRecord }) {
       <button className="wordmark" onClick={() => onPage('garden')}>Memory Garden</button>
       <nav aria-label="主导航">
         {[
-          ['garden', '花园'],
-          ['archive', '档案'],
-          ['growth', '生长'],
+          ['garden', 'Garden'],
+          ['archive', 'Archive'],
+          ['growth', 'Growth'],
         ].map(([id, label]) => <button key={id} className={page === id ? 'is-active' : ''} onClick={() => onPage(id)}>{label}</button>)}
       </nav>
-      <button className="new-memory" onClick={onRecord}><span>＋</span> 新记忆</button>
+      <button className="new-memory" onClick={onRecord}><span>＋</span> New memory</button>
     </header>
   )
 }
@@ -132,31 +132,31 @@ function MemoryDetail({ memory, memories, onClose, onSelect }) {
     <div className="memory-detail-overlay" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
       <article className="memory-detail" role="dialog" aria-modal="true" aria-labelledby="memory-detail-title">
         <header className="memory-detail-head">
-          <button onClick={onClose}>← 返回档案</button>
+          <button onClick={onClose}>← Back to archive</button>
           <span>{String(index + 1).padStart(2, '0')} / {String(memories.length).padStart(2, '0')}</span>
-          <button onClick={onClose}>关闭 ×</button>
+          <button onClick={onClose}>Close ×</button>
         </header>
         <div className="memory-detail-body">
           <figure className="memory-detail-visual">
             <MemoryImage src={memory.image} alt={memory.title} />
-            <figcaption>{memory.source} · 收藏于 {memory.date}</figcaption>
+            <figcaption>{memory.source} · collected {memory.date}</figcaption>
           </figure>
           <div className="memory-detail-copy">
             <span className="memory-detail-latin">{theme?.latin}</span>
             <h1 id="memory-detail-title">{memory.title}</h1>
             <div className="memory-detail-meta"><span>{memory.date}</span><span>{memory.category}</span><span>{memory.source}</span></div>
-            <section><small>留下的痕迹</small><p>{memory.trace}</p></section>
-            <section><small>花园解读</small><p>{memory.meaning}</p></section>
+            <section><small>WHAT REMAINED</small><p>{memory.trace}</p></section>
+            <section><small>GARDEN READING</small><p>{memory.meaning}</p></section>
             <div className="memory-root-note"><i /><span>这段记忆生长在“{theme?.name}”中，并通过相似的地点、感官或念头继续连接。</span></div>
             <div className="memory-detail-related">
-              <small>相关根系</small>
+              <small>RELATED ROOTS</small>
               <RelatedLinks memory={memory} memories={memories} onSelect={onSelect} />
             </div>
           </div>
         </div>
         <footer className="memory-detail-nav">
-          <button onClick={() => move(-1)}>← 上一段记忆</button>
-          <button onClick={() => move(1)}>下一段记忆 →</button>
+          <button onClick={() => move(-1)}>← Previous memory</button>
+          <button onClick={() => move(1)}>Next memory →</button>
         </footer>
       </article>
     </div>
@@ -224,14 +224,14 @@ function ContextSense({ memories, customMemories, onOpen }) {
   return (
     <aside className={`context-sense ${expanded ? 'is-expanded' : ''}`} aria-live="polite">
       <button className="sense-trigger" onClick={() => setExpanded((current) => !current)} aria-expanded={expanded}>
-        <i /><span><small>花园感应</small><strong>{signal.label}</strong></span><b>{expanded ? '×' : '↗'}</b>
+        <i /><span><small>GARDEN SENSING</small><strong>{signal.label}</strong></span><b>{expanded ? '×' : '↗'}</b>
       </button>
       {expanded ? (
         <div className="sense-body">
           <p>{signal.note}</p>
           <button className="sense-memory" onClick={() => onOpen(memory.id)}>
             <MemoryImage src={memory.image} alt="" />
-            <span><small>花园想起了</small><strong>{memory.title}</strong><em>{memory.date} · {memory.category}</em></span>
+            <span><small>THE GARDEN REMEMBERS</small><strong>{memory.title}</strong><em>{memory.date} · {memory.category}</em></span>
             <Arrow />
           </button>
           <div className="sense-actions">
@@ -281,7 +281,7 @@ function ThemeFlower({ theme, memories, index, onEnter }) {
           <MemoryImage key={`${memory.id}-${particleIndex}`} src={memory.image} alt="" style={{ '--petal-x': `${x}%`, '--petal-y': `${y}%`, '--petal-size': `${size}px`, '--petal-rotate': `${rotate}deg`, '--particle-delay': `${delay}s`, '--petal-layer': layer }} />
         ))}
       </span>
-      <span className="flower-label"><em>{theme.latin}</em><strong>{theme.name}</strong><small>{String(memories.length).padStart(2, '0')} 段记忆 · {rootCount} 条生长根系</small></span>
+      <span className="flower-label"><em>{theme.latin}</em><strong>{theme.name}</strong><small>{String(memories.length).padStart(2, '0')} memories · {rootCount} living roots</small></span>
     </button>
   )
 }
@@ -343,7 +343,7 @@ function GardenPage({ memories, selectedId, onSelect, onPage }) {
 
         {activeTheme ? (
           <div className="theme-bloom" key={activeTheme} style={{ '--accent': theme.accent }}>
-            <button className="garden-back" onClick={closeTheme}>← 返回所有花园</button>
+            <button className="garden-back" onClick={closeTheme}>← All gardens</button>
             <div className="bloom-title"><span>{theme.latin}</span><h1>{theme.name}</h1><p>{theme.note}</p></div>
             <svg className="bloom-orbit" viewBox="0 0 1000 650" preserveAspectRatio="none" aria-hidden="true">
               <ellipse cx="500" cy="330" rx="405" ry="245" />
@@ -373,27 +373,27 @@ function GardenPage({ memories, selectedId, onSelect, onPage }) {
                   <span>{selectedInTheme.date} · {selectedInTheme.source}</span>
                   <h2>{selectedInTheme.title}</h2>
                   <p>{selectedInTheme.trace}</p>
-                  <button onClick={() => onSelect(selectedInTheme.id)}>让这段记忆保持清晰 <Arrow /></button>
+                  <button onClick={() => onSelect(selectedInTheme.id)}>Keep this memory in focus <Arrow /></button>
                 </div>
               </article>
             ) : null}
-            <p className="bloom-hint">沿着轨道移动 · 每张图像都会回应</p>
+            <p className="bloom-hint">Move across the orbit · each image responds</p>
           </div>
         ) : (
           <div className="garden-overview">
-            <div className="garden-intro"><span>01—05 / 生长中的记忆集合</span><h1>记忆在彼此陪伴中<br />继续生长。</h1><p>靠近一座主题花园，看聚合的记忆如何舒展为一条可浏览的关系轨道。</p></div>
+            <div className="garden-intro"><span>01—05 / Living collections</span><h1>Your memories<br />grow in company.</h1><p>靠近一座主题花园，看聚合的记忆如何舒展为一条可浏览的关系轨道。</p></div>
             {themes.map((item, index) => (
               <div key={item.id} className={`flower-slot ${primedTheme === item.id ? 'is-primed' : ''}`}>
                 <ThemeFlower theme={item} memories={groups.get(item.id) || []} index={index} onEnter={handleThemeIntent} />
               </div>
             ))}
-            <p className="garden-instruction">停留片刻 · 让花园认出你</p>
+            <p className="garden-instruction">Stay for a moment · let the garden recognize you</p>
           </div>
         )}
       </section>
       <div className="garden-toolbar">
-        <div><button className="is-active" onClick={closeTheme}>主题花园</button><button onClick={() => onPage('archive')}>全部记忆</button></div>
-        <span>{memories.length} 段记忆正在呼吸</span>
+        <div><button className="is-active" onClick={closeTheme}>Gardens</button><button onClick={() => onPage('archive')}>All memories</button></div>
+        <span>{memories.length} memories are breathing</span>
       </div>
     </main>
   )
@@ -405,7 +405,7 @@ function ArchivePage({ memories, selectedId, onSelect, onOpenDetail }) {
   return (
     <main className="archive-page">
       <div className="archive-head">
-        <h1>记忆档案 <sup>({memories.length})</sup></h1>
+        <h1>Archive <sup>({memories.length})</sup></h1>
         <p>每一张图像都是可返回的入口。按类型筛选，或直接打开一段记忆。</p>
       </div>
       <div className="archive-filters">
@@ -447,11 +447,11 @@ function GrowthPage({ memories, selectedId, onSelect, onOpen }) {
   return (
     <main className="growth-page">
       <div className="growth-head">
-        <h1>生长轨迹</h1>
+        <h1>Growth</h1>
         <p>时间向右延伸；同一行是持续出现的主题，弯曲的线表示跨主题关系。</p>
       </div>
       <section className="growth-canvas" aria-label="记忆发展线">
-        <div className="growth-months"><span>2025年3月</span><span>6月</span><span>9月</span><span>12月</span><span>2026年2月</span></div>
+        <div className="growth-months"><span>MAR 2025</span><span>JUN</span><span>SEP</span><span>DEC</span><span>FEB 2026</span></div>
         {themes.map((theme, index) => <div key={theme.id} className="theme-lane" style={{ '--lane': index }}><span>{theme.name}</span><i /></div>)}
         <svg viewBox="0 0 1000 570" preserveAspectRatio="none" aria-hidden="true">
           {relationLines.map(({ id, from, to, active }) => <path key={id} className={active ? 'is-active' : ''} d={`M${from.x} ${from.y} C${(from.x + to.x) / 2} ${from.y}, ${(from.x + to.x) / 2} ${to.y}, ${to.x} ${to.y}`} />)}
@@ -469,7 +469,7 @@ function GrowthPage({ memories, selectedId, onSelect, onOpen }) {
         <span>{themes.find((theme) => theme.id === selected.theme)?.name}</span>
         <strong>{selected.title}</strong>
         <p>{selected.meaning}</p>
-        <button onClick={onOpen}>打开记忆 <Arrow /></button>
+        <button onClick={onOpen}>Open memory <Arrow /></button>
       </aside>
     </main>
   )
@@ -531,27 +531,27 @@ function RecordModal({ open, onClose, onSave, nextOrder }) {
   return (
     <div className="record-overlay" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
       <section className="record-modal" role="dialog" aria-modal="true" aria-labelledby="record-title">
-        <button className="record-close" onClick={onClose}>关闭 ×</button>
+        <button className="record-close" onClick={onClose}>Close ×</button>
         <span className="record-count">{String(nextOrder).padStart(2, '0')}</span>
         {step === 'write' ? (
           <form onSubmit={continueRecord}>
-            <div className="record-question"><h1 id="record-title">什么留在了<br />你的心里？</h1><p>写下一件仍然留在脑海里的事。可以很小，也不需要先分类。</p></div>
+            <div className="record-question"><h1 id="record-title">What stayed<br />with you?</h1><p>写下一件仍然留在脑海里的事。可以很小，也不需要先分类。</p></div>
             <div className="record-fields">
-              <label>标题<input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="给它一个名字" autoFocus /></label>
-              <label>记忆<textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="发生了什么？为什么想留下它？" rows="5" /></label>
-              <label className="image-input">图像<input type="file" accept="image/*" onChange={(event) => chooseImage(event.target.files?.[0])} /><span>{image ? '已选择图像' : '＋ 添加一张图像'}</span></label>
-              <button className="record-next" disabled={!title.trim() || !note.trim()}>寻找一条连接 <Arrow /></button>
+              <label>Title<input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="给它一个名字" autoFocus /></label>
+              <label>Memory<textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="发生了什么？为什么想留下它？" rows="5" /></label>
+              <label className="image-input">Image<input type="file" accept="image/*" onChange={(event) => chooseImage(event.target.files?.[0])} /><span>{image ? 'Image selected' : '＋ Add an image'}</span></label>
+              <button className="record-next" disabled={!title.trim() || !note.trim()}>Find a connection <Arrow /></button>
             </div>
-            <div className={`record-preview ${image ? 'has-image' : ''}`}>{image ? <MemoryImage src={image} alt="新记忆预览" /> : <span>图像预览</span>}</div>
+            <div className={`record-preview ${image ? 'has-image' : ''}`}>{image ? <MemoryImage src={image} alt="新记忆预览" /> : <span>Image preview</span>}</div>
           </form>
         ) : (
           <div className="connection-step">
-            <div><span>建议的连接</span><h1 id="record-title">它可以生长在<br />哪里？</h1><blockquote>{note}</blockquote></div>
+            <div><span>Suggested connection</span><h1 id="record-title">Where could<br />this grow?</h1><blockquote>{note}</blockquote></div>
             <div className="theme-choices">
               {themes.map((item) => <button key={item.id} className={theme === item.id ? 'is-active' : ''} onClick={() => setTheme(item.id)}><span>{item.name}</span><i /></button>)}
             </div>
             <div className="connection-preview"><MemoryImage src={image || `/memories/${String(((nextOrder - 1) % 20) + 1).padStart(2, '0')}.jpg`} alt="" /><span>{title}</span></div>
-            <button className="record-next" onClick={save}>加入记忆花园 <Arrow /></button>
+            <button className="record-next" onClick={save}>Add to the garden <Arrow /></button>
           </div>
         )}
       </section>
